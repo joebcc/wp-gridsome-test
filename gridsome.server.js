@@ -9,17 +9,17 @@ const axios = require('axios');
 module.exports = function (api) {
   api.loadSource(async ({ addCollection }) => {
     // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
-      const { data } = await axios.get('http://wpgridsometest.dev.cc/wp-json/wp/v2/posts');
+      const { data } = await axios.get('http://joebcc.com/index.php/wp-json/wp/v2/posts');
 
       const collection = addCollection('Post')
 
       for (const item of data) {
         collection.addNode({
           id: item.id,
-          title: item.title,
+          title: item.title.rendered,
           slug: item.slug,
           date: item.date,
-          content: item.content
+          content: item.content.rendered
         })
       }
   })
