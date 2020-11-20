@@ -20,6 +20,7 @@ query {
   }
 }
 
+
 </static-query>
 
 <style>
