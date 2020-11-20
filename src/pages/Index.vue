@@ -23,6 +23,7 @@
   </Layout>
 </template>
 
+
 <static-query>
   query {
     allPost {
