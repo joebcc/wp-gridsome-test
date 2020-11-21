@@ -4,10 +4,21 @@
     <!-- Learn how to use images here: https://gridsome.org/docs/images -->
     <g-image alt="Example image" src="~/favicon.png" width="135" />
 
+    <h4>
+    Posts:
+    </h4>
     <div v-for="post in $static.allPost.edges" :key="post.slug">
-      <h1>{{post.node.title}}</h1>
+      <h1><a :href="'posts/' + post.node.slug">{{post.node.title}}</a></h1>
 
-      <div v-html=post.node.content />
+
+    </div>
+    <h5 class="w-full bg-blue-300 p-2">
+    Pages:
+    </h5>
+    <div v-for="post in $static.allPages.edges" :key="post.slug">
+      <h1><a :href="'pages/' + post.node.slug">{{post.node.title}}</a></h1>
+
+
     </div>
 <!-- 
     <h1>{{$static.allPost.edges[0].node.title}}</h1>
@@ -32,7 +43,16 @@
           id
           slug
           title 
-          content 
+          content
+        }
+      }
+    } 
+    allPages {
+      edges {
+        node {
+          slug
+          title 
+          content
         }
       }
     } 
