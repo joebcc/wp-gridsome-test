@@ -7,6 +7,7 @@
     "explore": "gridsome explore"
   },
   "dependencies": {
+    "@gridsome/source-wordpress": "^0.5.3",
     "axios": "^0.21.0",
     "css-loader": "^5.0.1",
     "gridsome": "^0.7.0",

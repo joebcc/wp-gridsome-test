@@ -45,33 +45,57 @@ module.exports = {
   },
   plugins: [
     {
-
       use: 'gridsome-plugin-svg',
       options: {
-      // default options below
-      goesBothWays: false,
-      svgo: [
-        {
-          removeTitle: false
-        },
-        {
-          prefixIds: {
-            prefix: (_, {path}) => basename(path, '.svg'),
-            delim: '-',
+        // default options below
+        goesBothWays: false,
+        svgo: [
+          {
+            removeTitle: false
           },
-        },
-        {
-          removeDesc: false
-        },
-        {
-          removeViewBox: false,
-        },
-        {
-          sortAttrs: true,
-        }
+          {
+            prefixIds: {
+              prefix: (_, {path}) => basename(path, '.svg'),
+              delim: '-',
+            },
+          },
+          {
+            removeDesc: false
+          },
+          {
+            removeViewBox: false,
+          },
+          {
+            sortAttrs: true,
+          }
         ],
       }
-
-    }
+    },
+    {
+      use: '@gridsome/source-wordpress',
+      options: {
+        baseUrl: 'http://joebcc.com/index.php/', // required
+        apiBase: 'wp-json',
+        typeName: 'WordPress',
+        perPage: 100,
+        concurrent: 10,
+        customEndpoints: [
+          {
+              typeName: "Posts",
+              route: "/wp/v2/posts",
+              normalize: true,
+          },
+          {
+              typeName: "Pages",
+              route: "/wp/v2/pages",
+              normalize: true,
+          },
+      ]
+      }
+    },
   ],
+  templates: {
+    WordPressPost: '/posts/:slug',
+    WordPressPage: '/pages/:slug'
+  }
 }

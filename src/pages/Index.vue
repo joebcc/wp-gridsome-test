@@ -7,7 +7,7 @@
     <h4>
     Posts:
     </h4>
-    <div v-for="post in $static.allPost.edges" :key="post.slug">
+    <div v-for="post in $static.allPosts.edges" :key="post.slug">
       <h1><a :href="'posts/' + post.node.slug">{{post.node.title}}</a></h1>
 
 
@@ -37,7 +37,7 @@
 
 <static-query>
   query {
-    allPost {
+    allPosts {
       edges {
         node {
           id
@@ -53,6 +53,9 @@
           slug
           title 
           content
+          acf {
+            test
+          }
         }
       }
     } 

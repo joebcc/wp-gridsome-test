@@ -10,35 +10,12 @@ const axios = require('axios');
 module.exports = function (api) {
   api.loadSource(async ({ addCollection }) => {
     // Use the Data Store API here: https://gridsome.org/docs/data-store-api/
-      const { data: posts } = await axios.get('http://joebcc.com/index.php/wp-json/wp/v2/posts');
-      const { data: pages } = await axios.get('http://joebcc.com/index.php/wp-json/wp/v2/pages');
-
-      const collection = addCollection('Post')
-      const pageCollection = addCollection('Pages')
-
-      for (const item of posts) {
-        collection.addNode({
-          id: item.id,
-          title: item.title.rendered,
-          slug: item.slug,
-          date: item.date,
-          content: item.content.rendered
-        })
-      }
-      for (const item of pages) {
-        pageCollection.addNode({
-          id: item.id,
-          title: item.title.rendered,
-          slug: item.slug,
-          date: item.date,
-          content: item.content.rendered
-        })
-      }
+      
   })
 
   api.createManagedPages(async ({ graphql, createPage }) => {
     const { data } = await graphql(`{
-      allPost {
+      allPosts {
         edges {
           node {
             id
@@ -55,6 +32,9 @@ module.exports = function (api) {
             slug
             title
             content
+            acf {
+              test
+            }
           }
         }
       }
@@ -63,15 +43,16 @@ module.exports = function (api) {
     data.allPages.edges.forEach(({ node }) => {
       createPage({
         path: `/pages/${node.slug}`,
-        component: './src/components/SinglePost.vue',
+        component: './src/components/SinglePage.vue',
         context: {
           slug: node.slug,
           title: node.title,
           content: node.content,
+          acf: node.acf,
         }
       })
     })
-    data.allPost.edges.forEach(({ node }) => {
+    data.allPosts.edges.forEach(({ node }) => {
       createPage({
         path: `/posts/${node.slug}`,
         component: './src/components/SinglePost.vue',
