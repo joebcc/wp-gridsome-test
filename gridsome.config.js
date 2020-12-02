@@ -71,31 +71,31 @@ module.exports = {
         ],
       }
     },
-    {
-      use: '@gridsome/source-wordpress',
-      options: {
-        baseUrl: 'http://joebcc.com/index.php/', // required
-        apiBase: 'wp-json',
-        typeName: 'WordPress',
-        perPage: 100,
-        concurrent: 10,
-        customEndpoints: [
-          {
-              typeName: "Posts",
-              route: "/wp/v2/posts",
-              normalize: true,
-          },
-          {
-              typeName: "Pages",
-              route: "/wp/v2/pages",
-              normalize: true,
-          },
-      ]
-      }
-    },
+    // {
+    //   use: '@gridsome/source-wordpress',
+    //   options: {
+    //     baseUrl: 'https://www.sisense.com/', // required
+    //     apiBase: 'wp-json',
+    //     typeName: 'WordPress',
+    //     perPage: 100,
+    //     concurrent: 10,
+    //     customEndpoints: [
+    //       {
+    //           typeName: "Posts",
+    //           route: "/wp/v2/posts",
+    //           normalize: true,
+    //       },
+    //       {
+    //           typeName: "Pages",
+    //           route: "/wp/v2/pages",
+    //           normalize: true,
+    //       },
+    //   ]
+    //   }
+    // },
   ],
-  templates: {
-    WordPressPost: '/posts/:slug',
-    WordPressPage: '/pages/:slug'
-  }
+  // templates: {
+  //   WordPressPost: '/posts/:slug',
+  //   WordPressPage: '/pages/:slug'
+  // }
 }
